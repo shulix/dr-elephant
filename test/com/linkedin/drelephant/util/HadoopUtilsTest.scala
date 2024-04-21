@@ -70,14 +70,14 @@ class HadoopUtilsTest extends FunSpec with Matchers {
     describe(".isActiveNameNode") {
       it("returns true for active name nodes") {
         val hadoopUtils =
-          newFakeHadoopUtilsForNameNode(Map(("nn1.grid.example.com", ("nn1-ha1.grid.example.com", "active"))))
-        hadoopUtils.isActiveNameNode("nn1.grid.example.com") should be(true)
+          newFakeHadoopUtilsForNameNode(Map(("srv-01-01-0122.iad1.nxxn.io", ("nn1-ha1.grid.example.com", "active"))))
+        hadoopUtils.isActiveNameNode("srv-01-01-0122.iad1.nxxn.io") should be(true)
       }
 
       it("returns false for standby name nodes") {
         val hadoopUtils =
-          newFakeHadoopUtilsForNameNode(Map(("nn1.grid.example.com", ("nn1-ha1.grid.example.com", "standby"))))
-        hadoopUtils.isActiveNameNode("nn1.grid.example.com") should be(false)
+          newFakeHadoopUtilsForNameNode(Map(("srv-01-01-0122.iad1.nxxn.io", ("nn1-ha1.grid.example.com", "standby"))))
+        hadoopUtils.isActiveNameNode("srv-01-01-0122.iad1.nxxn.io") should be(false)
       }
     }
   }

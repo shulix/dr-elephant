@@ -74,12 +74,12 @@ class SparkFsFetcherTest extends FunSpec with Matchers with MockitoSugar {
 
           override lazy val sparkConf =
             new SparkConf()
-              .set("spark.eventLog.dir", "webhdfs://nn1.grid.example.com:50070/logs/spark")
+              .set("spark.eventLog.dir", "webhdfs://srv-01-01-0122.iad1.nxxn.io:50070/logs/spark")
               .set("spark.eventLog.compress", "true")
               .set("spark.io.compression.codec", "snappy")
 
           override lazy val sparkUtils = SparkUtilsTest.newFakeSparkUtilsForEventLog(
-            new URI("webhdfs://nn1.grid.example.com:50070"),
+            new URI("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070"),
             new Path("/logs/spark"),
             new Path("application_1_1.snappy"),
             eventLogBytes

@@ -157,7 +157,7 @@ class SparkFetcherTest extends FunSpec with Matchers with MockitoSugar {
       sparkConf.get("spark.yarn.historyServer.address") should be("jh1.grid.example.com:18080")
       sparkConf.get("spark.eventLog.enabled") should be("true")
       sparkConf.get("spark.eventLog.compress") should be("true")
-      sparkConf.get("spark.eventLog.dir") should be("hdfs://nn1.grid.example.com:9000/logs/spark")
+      sparkConf.get("spark.eventLog.dir") should be("hdfs://srv-01-01-0122.iad1.nxxn.io:9000/logs/spark")
     }
 
     it("gets its SparkConf when SPARK_HOME is set") {
@@ -186,7 +186,7 @@ class SparkFetcherTest extends FunSpec with Matchers with MockitoSugar {
       sparkConf.get("spark.yarn.historyServer.address") should be("jh1.grid.example.com:18080")
       sparkConf.get("spark.eventLog.enabled") should be("true")
       sparkConf.get("spark.eventLog.compress") should be("true")
-      sparkConf.get("spark.eventLog.dir") should be("hdfs://nn1.grid.example.com:9000/logs/spark")
+      sparkConf.get("spark.eventLog.dir") should be("hdfs://srv-01-01-0122.iad1.nxxn.io:9000/logs/spark")
     }
 
     it("throws an exception if neither SPARK_CONF_DIR nor SPARK_HOME are set") {

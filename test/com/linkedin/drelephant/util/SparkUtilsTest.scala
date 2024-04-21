@@ -46,14 +46,14 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
 
         val (fs, path) = sparkUtils.fileSystemAndPathForEventLogDir(hadoopConfiguration,
           sparkConf,
-          Some("webhdfs://nn1.grid.example.com:50070/logs/spark"))
-        fs.getUri.toString should be("webhdfs://nn1.grid.example.com:50070")
+          Some("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070/logs/spark"))
+        fs.getUri.toString should be("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070")
         path should be(new Path("/logs/spark"))
       }
 
       it("returns a webhdfs filesystem + path based on spark.eventLog.dir when it is a webhdfs URL") {
         val hadoopConfiguration = new Configuration(false)
-        val sparkConf = new SparkConf().set("spark.eventLog.dir", "webhdfs://nn1.grid.example.com:50070/logs/spark")
+        val sparkConf = new SparkConf().set("spark.eventLog.dir", "webhdfs://srv-01-01-0122.iad1.nxxn.io:50070/logs/spark")
         val sparkUtils = new SparkUtils {
           override lazy val logger = mock[Logger]
           override lazy val hadoopUtils = mock[HadoopUtils]
@@ -61,13 +61,13 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
         }
 
         val (fs, path) = sparkUtils.fileSystemAndPathForEventLogDir(hadoopConfiguration, sparkConf, None)
-        fs.getUri.toString should be("webhdfs://nn1.grid.example.com:50070")
+        fs.getUri.toString should be("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070")
         path should be(new Path("/logs/spark"))
       }
 
       it("returns a webhdfs filesystem + path based on spark.eventLog.dir when it is an hdfs URL") {
         val hadoopConfiguration = new Configuration(false)
-        val sparkConf = new SparkConf().set("spark.eventLog.dir", "hdfs://nn1.grid.example.com:9000/logs/spark")
+        val sparkConf = new SparkConf().set("spark.eventLog.dir", "hdfs://srv-01-01-0122.iad1.nxxn.io:9000/logs/spark")
         val sparkUtils = new SparkUtils {
           override lazy val logger = mock[Logger]
           override lazy val hadoopUtils = mock[HadoopUtils]
@@ -75,7 +75,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
         }
 
         val (fs, path) = sparkUtils.fileSystemAndPathForEventLogDir(hadoopConfiguration, sparkConf, None)
-        fs.getUri.toString should be("webhdfs://nn1.grid.example.com:50070")
+        fs.getUri.toString should be("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070")
         path should be(new Path("/logs/spark"))
       }
 
@@ -177,7 +177,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
             .set("spark.eventLog.compress", "true")
 
         val sparkUtils = SparkUtilsTest.newFakeSparkUtilsForEventLog(
-          new URI("webhdfs://nn1.grid.example.com:50070"),
+          new URI("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070"),
           new Path("/logs/spark"),
           new Path("application_1_1.lz4"),
           Array.empty[Byte]
@@ -188,7 +188,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
         val (path, codec) =
           sparkUtils.pathAndCodecforEventLog(sparkConf: SparkConf, fs: FileSystem, basePath: Path, "application_1", Some("1"))
 
-        path should be(new Path("webhdfs://nn1.grid.example.com:50070/logs/spark/application_1_1.lz4"))
+        path should be(new Path("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070/logs/spark/application_1_1.lz4"))
         codec.value should be(a[LZ4CompressionCodec])
       }
       it("returns the path and codec for the event log, given the base path and appid. Extracts attempt and codec from path") {
@@ -200,7 +200,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
             .set("spark.eventLog.compress", "true")
 
         val sparkUtils = SparkUtilsTest.newFakeSparkUtilsForEventLog(
-          new URI("webhdfs://nn1.grid.example.com:50070"),
+          new URI("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070"),
           new Path("/logs/spark"),
           new Path("application_1_1.lz4"),
           Array.empty[Byte]
@@ -211,7 +211,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
         val (path, codec) =
           sparkUtils.pathAndCodecforEventLog(sparkConf: SparkConf, fs: FileSystem, basePath: Path, "application_1", None)
 
-        path should be(new Path("webhdfs://nn1.grid.example.com:50070/logs/spark/application_1_1.lz4"))
+        path should be(new Path("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070/logs/spark/application_1_1.lz4"))
         codec.value should be(a[LZ4CompressionCodec])
       }
     }
@@ -240,7 +240,7 @@ class SparkUtilsTest extends FunSpec with org.scalatest.Matchers with OptionValu
             .set("spark.eventLog.compress", "true")
 
         val sparkUtils = SparkUtilsTest.newFakeSparkUtilsForEventLog(
-          new URI("webhdfs://nn1.grid.example.com:50070"),
+          new URI("webhdfs://srv-01-01-0122.iad1.nxxn.io:50070"),
           new Path("/logs/spark"),
           new Path("application_1_1.snappy"),
           eventLogBytes
