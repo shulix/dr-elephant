@@ -17,8 +17,7 @@
 logLevel := Level.Warn
 
 // The Typesafe repository
-//resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
-resolvers += "Typesafe Simple Repository" at  "http://repo.typesafe.com/typesafe/simple/maven-releases/"
+resolvers += "Typesafe Simple Repository" at  "typesafe-releases: https://repo.typesafe.com/typesafe/maven-releases/"
 // Use the Play sbt plugin for Play projects
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % Option(System.getProperty("play.version")).getOrElse("2.2.2"))
 
